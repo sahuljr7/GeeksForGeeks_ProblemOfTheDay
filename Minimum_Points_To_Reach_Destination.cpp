@@ -1,3 +1,4 @@
+## (Code Explaination) [https://devverse-sahul.vercel.app/blog/gfg2]
 class Solution {
 public:
     int minPoints(int m, int n, vector<vector<int>>& points) {
