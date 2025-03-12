@@ -8,7 +8,7 @@ The **Min Cost Climbing Stairs** problem follows a **Dynamic Programming (DP) ap
 2. **Recurrence Relation**:
    - To reach step `i`, you can either come from `i-1` or `i-2`, paying the respective cost.
    - \[
-   dp[i] = \min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2])
+   dp[i] = min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2])
    \]
 3. **Space Optimization**:
    - Instead of `O(N)`, use **two variables** (`prev2` and `prev1`) to store only the last two computed values.
