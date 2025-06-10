@@ -1,0 +1,88 @@
+// https://www.geeksforgeeks.org/problems/exactly-one-swap--170637/1
+
+Let’s walk through the core logic:
+
+```java
+long totalSwaps = (long) n * (n - 1) / 2;
+```
+
+> Counts **all possible (i, j)** swap pairs (i < j)
+
+```java
+for (int f : freq) {
+    if (f > 1) {
+        hasDuplicateChar = true;
+        duplicateSwaps += (long) f * (f - 1) / 2;
+    }
+}
+```
+
+> Counts the number of swaps that **don’t change the string** (i.e., between equal characters)
+
+```java
+long distinct = totalSwaps - duplicateSwaps;
+```
+
+> These are the swaps that **change the string**
+
+```java
+if (hasDuplicateChar) {
+    distinct += 1;
+}
+```
+
+> The key trick: if **any duplicate character exists**, we can make at least **one swap** that keeps the string same — and we must **add 1**.
+
+---
+
+### 🧠 Complexity
+
+* **Time:** O(N) — one pass to count characters.
+* **Space:** O(1) — fixed 26-char array.
+
+---
+
+### ✅ Final Java Solution (Clean)
+
+```java
+class Solution {
+    public int countStrings(String s) {
+        int n = s.length();
+        long totalSwaps = (long) n * (n - 1) / 2;
+
+        int[] freq = new int[26];
+        for (char c : s.toCharArray()) {
+            freq[c - 'a']++;
+        }
+
+        long duplicateSwaps = 0;
+        boolean hasDuplicateChar = false;
+
+        for (int f : freq) {
+            if (f > 1) {
+                hasDuplicateChar = true;
+                duplicateSwaps += (long) f * (f - 1) / 2;
+            }
+        }
+
+        long distinct = totalSwaps - duplicateSwaps;
+
+        if (hasDuplicateChar) {
+            distinct += 1;
+        }
+
+        return (int) distinct;
+    }
+}
+```
+
+---
+
+### 🔢 Example: `s = "geek"`
+
+* Total swaps: 6
+* Duplicate swaps: 1 (between the 2 `e`s)
+* Distinct swaps: `6 - 1 + 1 = 6` ✅ Matches GFG
+
+---
+
